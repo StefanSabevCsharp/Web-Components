@@ -1,24 +1,31 @@
 const template = document.createElement("template");
 template.innerHTML = `
 <style>
-h3{
-color: blue
-}
+    label {
+    color: red;
+    display: block;
+    }
+    .description {
+    font-size: .65rem;
+    color:black;
+    font-weight: lighter;
+    }
+
 </style>
-<h3 data-title>
+<label>
+<input type="checkbox" />
 <slot></slot>
-</h3>
+<span class="description">
+<slot name="description"></slot>
+</span>
+</label>
 `
 
 class ToDoItem extends HTMLElement {
     constructor() {
         super();
-
         const shadow = this.attachShadow({mode : "open"});
         shadow.append(template.content.cloneNode(true));
-
-        this.title = shadow.querySelector("[data-title]");
-        this.title.innerText = this.innerText;
     }
 }
 
